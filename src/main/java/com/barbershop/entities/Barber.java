@@ -1,5 +1,9 @@
 package com.barbershop.entities;
 
+import com.barbershop.entities.Appointment;
+import com.barbershop.entities.BarberShop;
+import com.barbershop.entities.Schedule;
+import com.barbershop.entities.User;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -11,6 +15,9 @@ public class Barber extends User {
     private BarberShop barberShop; // Barbeiro associado a uma barbearia
 
     private double commission; // Comissão acumulada do barbeiro
+
+    @OneToOne(mappedBy = "barber", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Schedule schedule; // Agenda do barbeiro
 
     @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Appointment> appointments; // Agendamentos do barbeiro
@@ -39,6 +46,14 @@ public class Barber extends User {
         this.commission = commission;
     }
 
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
+
     public List<Appointment> getAppointments() {
         return appointments;
     }
@@ -47,4 +62,3 @@ public class Barber extends User {
         this.appointments = appointments;
     }
 }
-
