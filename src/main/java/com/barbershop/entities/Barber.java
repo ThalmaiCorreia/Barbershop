@@ -26,8 +26,9 @@ public class Barber extends User {
         // Construtor padrão
     }
 
-    public Barber(String name, String email, String phone, String password) {
+    public Barber(String name, String email, String phone, String password, BarberShop barberShop) {
         super(name, email, phone, password);
+        this.barberShop=barberShop;
     }
 
     public BarberShop getBarberShop() {

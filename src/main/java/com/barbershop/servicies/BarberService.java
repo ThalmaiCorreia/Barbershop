@@ -3,19 +3,20 @@ package com.barbershop.servicies;
 import com.barbershop.entities.Barber;
 import com.barbershop.exceptions.*;
 import com.barbershop.repositories.BarberRepository;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Service
 public class BarberService {
 
     private final BarberRepository barberRepository;
-    private static final Logger auditLogger = (Logger) LoggerFactory.getLogger("audit");
+    private static final Logger auditLogger = LoggerFactory.getLogger(BarberService.class);
+
+
 
     @Autowired
     public BarberService(BarberRepository barberRepository) {

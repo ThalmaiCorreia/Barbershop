@@ -2,7 +2,6 @@ package com.barbershop.entities;
 
 import jakarta.persistence.*;
 import java.util.Date;
-import java.util.Date;
 
 @Entity
 @Table(name = "tb_appointment")
@@ -23,6 +22,9 @@ public class Appointment {
     @ManyToOne
     private Schedule schedule; // Agenda associada ao agendamento
 
+    @ManyToOne
+    private BarberShop barberShop; // Barbearia associada ao agendamento
+
     private Date appointmentDate; // Data e hora do agendamento
     private int duration; // Duração do serviço em minutos
     private AppointmentStatus status;
@@ -31,19 +33,25 @@ public class Appointment {
         // Construtor padrão
     }
 
-    public Appointment(Customer customer, Barber barber, Services service, Schedule schedule, Date appointmentDate, int duration, AppointmentStatus status) {
+    public Appointment(Customer customer, Barber barber, Services service, Schedule schedule, BarberShop barberShop, Date appointmentDate, int duration, AppointmentStatus status) {
         this.customer = customer;
         this.barber = barber;
         this.service = service;
         this.schedule = schedule;
+        this.barberShop = barberShop;
         this.appointmentDate = appointmentDate;
         this.duration = duration;
         this.status = status;
     }
 
     // Getters e setters
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Customer getCustomer() {
@@ -78,6 +86,14 @@ public class Appointment {
         this.schedule = schedule;
     }
 
+    public BarberShop getBarberShop() {
+        return barberShop;
+    }
+
+    public void setBarberShop(BarberShop barberShop) {
+        this.barberShop = barberShop;
+    }
+
     public Date getAppointmentDate() {
         return appointmentDate;
     }
@@ -100,5 +116,20 @@ public class Appointment {
 
     public void setStatus(AppointmentStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Appointment that = (Appointment) o;
+
+        return id != null ? id.equals(that.id) : that.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

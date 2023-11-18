@@ -94,7 +94,7 @@ public class AppointmentService {
 
     public List<Appointment> findAppointmentsByBarber(Long barberId) {
         // Implemente a lógica para buscar compromissos por ID de barbeiro
-        return appointmentRepository.findByBarber_Id(barberId);
+        return appointmentRepository.findByBarberId(barberId);
     }
     public List<Appointment> findAppointmentsByCustomer(Customer customer){
         return appointmentRepository.findByCustomer(customer);

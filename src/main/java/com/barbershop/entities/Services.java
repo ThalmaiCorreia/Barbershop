@@ -1,10 +1,7 @@
 package com.barbershop.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_services")
@@ -16,6 +13,10 @@ public class Services {
     private String name; // Nome do serviço (por exemplo, "Corte", "Barba")
     private double price; // Preço do serviço
     private double commissionRate; // Taxa de comissão associada ao serviço
+
+    @ManyToOne
+    @JoinColumn(name = "barbershop_id")
+    private BarberShop barberShop; // Relacionamento com BarberShop
 
     public Services() {
         // Construtor padrão
@@ -55,5 +56,25 @@ public class Services {
     public void setCommissionRate(double commissionRate) {
         this.commissionRate = commissionRate;
     }
-}
 
+    public BarberShop getBarberShop() {
+        return barberShop;
+    }
+
+    public void setBarberShop(BarberShop barberShop) {
+        this.barberShop = barberShop;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Services services = (Services) o;
+        return Double.compare(services.price, price) == 0 && Double.compare(services.commissionRate, commissionRate) == 0 && Objects.equals(id, services.id) && Objects.equals(name, services.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, price, commissionRate);
+    }
+}
