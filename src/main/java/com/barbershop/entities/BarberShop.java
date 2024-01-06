@@ -1,5 +1,7 @@
 package com.barbershop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -17,12 +19,15 @@ public class BarberShop {
     private String password;
 
     @OneToMany(mappedBy = "barberShop", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Barber> barbers;
 
     @OneToMany(mappedBy = "barberShop", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Services> services;
 
     @OneToMany(mappedBy = "barberShop", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Appointment> appointments;
 
     public BarberShop() {

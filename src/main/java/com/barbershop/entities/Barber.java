@@ -4,6 +4,7 @@ import com.barbershop.entities.Appointment;
 import com.barbershop.entities.BarberShop;
 import com.barbershop.entities.Schedule;
 import com.barbershop.entities.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -17,9 +18,11 @@ public class Barber extends User {
     private double commission; // Comissão acumulada do barbeiro
 
     @OneToOne(mappedBy = "barber", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Schedule schedule; // Agenda do barbeiro
 
     @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Appointment> appointments; // Agendamentos do barbeiro
 
     public Barber() {
@@ -29,6 +32,9 @@ public class Barber extends User {
     public Barber(String name, String email, String phone, String password, BarberShop barberShop) {
         super(name, email, phone, password);
         this.barberShop=barberShop;
+    }
+
+    public Barber(Long barberId) {
     }
 
     public BarberShop getBarberShop() {

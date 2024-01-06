@@ -1,4 +1,4 @@
-package com.barbershop.servicies;
+package com.barbershop.services;
 
 import com.barbershop.entities.Appointment;
 import com.barbershop.entities.AppointmentStatus;
@@ -6,7 +6,6 @@ import com.barbershop.entities.Barber;
 import com.barbershop.entities.Customer;
 import com.barbershop.exceptions.AppointmentTimeUnavailableException;
 import com.barbershop.exceptions.InvalidAppointmentUpdateException;
-import com.barbershop.servicies.ScheduleService;
 import com.barbershop.exceptions.AppointmentNotFoundException;
 import com.barbershop.repositories.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;

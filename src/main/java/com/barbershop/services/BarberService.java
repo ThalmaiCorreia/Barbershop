@@ -1,4 +1,4 @@
-package com.barbershop.servicies;
+package com.barbershop.services;
 
 import com.barbershop.entities.Barber;
 import com.barbershop.exceptions.*;
@@ -64,6 +64,7 @@ public class BarberService {
         existingBarber.setName(updatedBarber.getName());
         existingBarber.setEmail(updatedBarber.getEmail());
         existingBarber.setPhone(updatedBarber.getPhone());
+        existingBarber.setBarberShop(updatedBarber.getBarberShop());
         // Outros campos podem ser atualizados da mesma forma
 
         // Salve as alterações no banco de dados
@@ -105,5 +106,10 @@ public class BarberService {
     public List<Barber> getAllBarbers() {
         // Implemente a lógica para buscar todos os barbeiros
         return barberRepository.findAll();
+    }
+
+    public Barber findById(Long barberId) {
+        return barberRepository.findById(barberId)
+                .orElseThrow(() -> new BarberNotFoundException("Barbeiro não encontrado com o ID: " + barberId));
     }
 }

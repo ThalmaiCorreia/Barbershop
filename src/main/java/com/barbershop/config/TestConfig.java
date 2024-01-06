@@ -7,7 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -16,7 +15,7 @@ import java.util.Date;
 public class TestConfig implements CommandLineRunner {
 
     @Autowired
-    private BarbershopRepository barbershopRepository;
+    private BarberShopRepository barbershopRepository;
     @Autowired
     private BarberRepository barberRepository;
 

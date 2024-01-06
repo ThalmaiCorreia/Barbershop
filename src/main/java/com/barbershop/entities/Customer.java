@@ -1,5 +1,6 @@
 package com.barbershop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "user_id")
 public class Customer extends User {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Appointment> appointmentHistory;
 
     public Customer() {

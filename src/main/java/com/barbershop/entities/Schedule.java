@@ -1,6 +1,7 @@
 package com.barbershop.entities;
 
 import jakarta.persistence.*;
+import org.springframework.data.util.Lazy;
 
 import java.util.Date;
 import java.util.List;
@@ -27,23 +28,14 @@ public class Schedule {
     @OneToMany(mappedBy = "schedule")
     private List<Appointment> appointments;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Barber barber;
 
     public Schedule() {
         // Construtor padrão
     }
 
-    public Schedule(Long id, Date openingTime, Date lunchBreakStart, Date lunchBreakEnd, Date closingTime, List<Appointment> appointments, Barber barber) {
-        this.id = id;
-        this.openingTime = openingTime;
-        this.lunchBreakStart = lunchBreakStart;
-        this.lunchBreakEnd = lunchBreakEnd;
-        this.closingTime = closingTime;
-        this.appointments = appointments;
-        this.barber = barber;
-    }
-    public Schedule(Long id, Date openingTime, Date lunchBreakStart, Date lunchBreakEnd, Date closingTime, Barber barber) {
+    public Schedule(Long id, Date openingTime, Date lunchBreakStart, Date lunchBreakEnd, Date closingTime,  Barber barber) {
         this.id = id;
         this.openingTime = openingTime;
         this.lunchBreakStart = lunchBreakStart;

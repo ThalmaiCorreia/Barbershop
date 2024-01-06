@@ -1,4 +1,4 @@
-package com.barbershop.servicies;
+package com.barbershop.services;
 
 import com.barbershop.entities.Customer;
 import com.barbershop.exceptions.*;
