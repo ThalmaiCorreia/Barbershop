@@ -1,5 +1,6 @@
 package com.barbershop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.data.util.Lazy;
 
@@ -26,6 +27,7 @@ public class Schedule {
     private Date closingTime;
 
     @OneToMany(mappedBy = "schedule")
+    @JsonIgnore
     private List<Appointment> appointments;
 
     @ManyToOne(fetch = FetchType.LAZY)

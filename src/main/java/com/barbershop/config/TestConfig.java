@@ -82,6 +82,7 @@ public class TestConfig implements CommandLineRunner {
         // Crie dois agendamentos em horários aleatórios
         Date appointmentTime1 = new Date();
         Date appointmentTime2 = new Date();
+        Date appointmentTime3 = new Date();
 
         appointmentTime1.setHours(10);
         appointmentTime1.setMinutes(30);
@@ -89,9 +90,13 @@ public class TestConfig implements CommandLineRunner {
         appointmentTime2.setHours(15);
         appointmentTime2.setMinutes(30);
 
+        appointmentTime2.setHours(14);
+        appointmentTime2.setMinutes(30);
+
         Appointment appointment1 = new Appointment(customer,barber, service1, schedule1, barberShop, appointmentTime1,30, AppointmentStatus.SCHEDULED );
         Appointment appointment2 = new Appointment(customer1, barber1, service2, schedule2, barberShop, appointmentTime2,30,  AppointmentStatus.COMPLETED);
+        Appointment appointment3 = new Appointment(customer1, barber1, service2, schedule2, barberShop, appointmentTime3,30,  AppointmentStatus.CANCELED);
 
-        appointmentRepository.saveAll(Arrays.asList(appointment1, appointment2));
+        appointmentRepository.saveAll(Arrays.asList(appointment1, appointment2, appointment3));
     }
 }

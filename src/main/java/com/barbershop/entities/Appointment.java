@@ -1,5 +1,7 @@
 package com.barbershop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -17,9 +19,11 @@ public class Appointment {
     private Barber barber; // Barbeiro que realizará o serviço
 
     @ManyToOne
+    @JsonIgnoreProperties("appointments")
     private Services service; // Serviço a ser realizado
 
     @ManyToOne
+    @JsonIgnore
     private Schedule schedule; // Agenda associada ao agendamento
 
     @ManyToOne
@@ -27,6 +31,8 @@ public class Appointment {
 
     private Date appointmentDate; // Data e hora do agendamento
     private int duration; // Duração do serviço em minutos
+
+    @Enumerated(EnumType.STRING)
     private AppointmentStatus status;
 
     public Appointment() {

@@ -1,6 +1,9 @@
 package com.barbershop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +20,10 @@ public class Services {
     @ManyToOne
     @JoinColumn(name = "barbershop_id")
     private BarberShop barberShop; // Relacionamento com BarberShop
+
+    @OneToMany(mappedBy = "service")
+    @JsonIgnoreProperties("service")
+    private List<Appointment> appointments;
 
     public Services() {
         // Construtor padrão
@@ -64,6 +71,15 @@ public class Services {
     public void setBarberShop(BarberShop barberShop) {
         this.barberShop = barberShop;
     }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
 
     @Override
     public boolean equals(Object o) {

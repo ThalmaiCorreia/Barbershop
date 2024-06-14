@@ -32,7 +32,7 @@ public class AppointmentService {
         }
 
         // Configure o status do agendamento (por exemplo, como "Agendado")
-        appointment.setStatus(AppointmentStatus.SCHEDULED);
+        appointment.setStatus(appointment.getStatus());
 
         // Salve o agendamento no banco de dados
         return appointmentRepository.save(appointment);
@@ -47,7 +47,7 @@ public class AppointmentService {
         }
 
         // Verifique se o campo "customer" não está sendo alterado
-        if (!existingAppointment.getCustomer().equals(updatedAppointment.getCustomer())) {
+        if (existingAppointment.getCustomer().equals(updatedAppointment.getCustomer())) {
             throw new InvalidAppointmentUpdateException("Não é permitido alterar o cliente do agendamento.");
         }
 
