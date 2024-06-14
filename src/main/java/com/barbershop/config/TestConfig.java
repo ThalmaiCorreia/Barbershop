@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -57,22 +59,14 @@ public class TestConfig implements CommandLineRunner {
         customerRepository.save(customer1);
 
         // Crie duas agendas com os horários fornecidos
-        Date openingTime = new Date();
-        Date lunchBreakStart = new Date();
-        Date lunchBreakEnd = new Date();
-        Date closingTime = new Date();
 
-        openingTime.setHours(9);
-        openingTime.setMinutes(0);
+        OffsetDateTime openingTime = OffsetDateTime.of(2024, 6, 13, 9, 0, 0, 0, ZoneOffset.UTC);
 
-        lunchBreakStart.setHours(13);
-        lunchBreakStart.setMinutes(0);
+        OffsetDateTime lunchBreakStart = OffsetDateTime.of(2024, 6, 13, 13, 0, 0, 0, ZoneOffset.UTC);
 
-        lunchBreakEnd.setHours(14);
-        lunchBreakEnd.setMinutes(0);
+        OffsetDateTime lunchBreakEnd = OffsetDateTime.of(2024, 6, 13, 14, 0, 0, 0, ZoneOffset.UTC);
 
-        closingTime.setHours(20);
-        closingTime.setMinutes(0);
+        OffsetDateTime closingTime = OffsetDateTime.of(2024, 6, 13, 20, 0, 0, 0, ZoneOffset.UTC);
 
         Schedule schedule1 = new Schedule(0L, openingTime, lunchBreakStart, lunchBreakEnd, closingTime, barber);
         Schedule schedule2 = new Schedule(0L, openingTime, lunchBreakStart, lunchBreakEnd, closingTime, barber1);
@@ -80,18 +74,12 @@ public class TestConfig implements CommandLineRunner {
         scheduleRepository.saveAll(Arrays.asList(schedule1, schedule2));
 
         // Crie dois agendamentos em horários aleatórios
-        Date appointmentTime1 = new Date();
-        Date appointmentTime2 = new Date();
-        Date appointmentTime3 = new Date();
 
-        appointmentTime1.setHours(10);
-        appointmentTime1.setMinutes(30);
+        OffsetDateTime appointmentTime1 = OffsetDateTime.of(2024, 6, 13, 10, 30, 0, 0, ZoneOffset.UTC);
 
-        appointmentTime2.setHours(15);
-        appointmentTime2.setMinutes(30);
+        OffsetDateTime appointmentTime2 = OffsetDateTime.of(2024, 6, 13, 15, 30, 0, 0, ZoneOffset.UTC);
 
-        appointmentTime2.setHours(14);
-        appointmentTime2.setMinutes(30);
+        OffsetDateTime appointmentTime3 = OffsetDateTime.of(2024, 6, 13, 14, 30, 0, 0, ZoneOffset.UTC);
 
         Appointment appointment1 = new Appointment(customer,barber, service1, schedule1, barberShop, appointmentTime1,30, AppointmentStatus.SCHEDULED );
         Appointment appointment2 = new Appointment(customer1, barber1, service2, schedule2, barberShop, appointmentTime2,30,  AppointmentStatus.COMPLETED);

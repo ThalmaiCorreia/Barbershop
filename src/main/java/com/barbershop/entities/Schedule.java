@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.data.util.Lazy;
 
+import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -14,17 +15,13 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(TemporalType.TIME)
-    private Date openingTime;
+    private OffsetDateTime openingTime;
 
-    @Temporal(TemporalType.TIME)
-    private Date lunchBreakStart;
+    private OffsetDateTime lunchBreakStart;
 
-    @Temporal(TemporalType.TIME)
-    private Date lunchBreakEnd;
+    private OffsetDateTime lunchBreakEnd;
 
-    @Temporal(TemporalType.TIME)
-    private Date closingTime;
+    private OffsetDateTime closingTime;
 
     @OneToMany(mappedBy = "schedule")
     @JsonIgnore
@@ -37,7 +34,7 @@ public class Schedule {
         // Construtor padrão
     }
 
-    public Schedule(Long id, Date openingTime, Date lunchBreakStart, Date lunchBreakEnd, Date closingTime,  Barber barber) {
+    public Schedule(Long id, OffsetDateTime openingTime, OffsetDateTime lunchBreakStart, OffsetDateTime lunchBreakEnd, OffsetDateTime closingTime,  Barber barber) {
         this.id = id;
         this.openingTime = openingTime;
         this.lunchBreakStart = lunchBreakStart;
@@ -52,35 +49,35 @@ public class Schedule {
         return id;
     }
 
-    public Date getOpeningTime() {
+    public OffsetDateTime getOpeningTime() {
         return openingTime;
     }
 
-    public void setOpeningTime(Date openingTime) {
+    public void setOpeningTime(OffsetDateTime openingTime) {
         this.openingTime = openingTime;
     }
 
-    public Date getLunchBreakStart() {
+    public OffsetDateTime getLunchBreakStart() {
         return lunchBreakStart;
     }
 
-    public void setLunchBreakStart(Date lunchBreakStart) {
+    public void setLunchBreakStart(OffsetDateTime lunchBreakStart) {
         this.lunchBreakStart = lunchBreakStart;
     }
 
-    public Date getLunchBreakEnd() {
+    public OffsetDateTime getLunchBreakEnd() {
         return lunchBreakEnd;
     }
 
-    public void setLunchBreakEnd(Date lunchBreakEnd) {
+    public void setLunchBreakEnd(OffsetDateTime lunchBreakEnd) {
         this.lunchBreakEnd = lunchBreakEnd;
     }
 
-    public Date getClosingTime() {
+    public OffsetDateTime getClosingTime() {
         return closingTime;
     }
 
-    public void setClosingTime(Date closingTime) {
+    public void setClosingTime(OffsetDateTime closingTime) {
         this.closingTime = closingTime;
     }
 

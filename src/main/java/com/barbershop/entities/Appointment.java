@@ -3,6 +3,8 @@ package com.barbershop.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 @Entity
@@ -29,7 +31,7 @@ public class Appointment {
     @ManyToOne
     private BarberShop barberShop; // Barbearia associada ao agendamento
 
-    private Date appointmentDate; // Data e hora do agendamento
+    private OffsetDateTime appointmentDate; // Data e hora do agendamento
     private int duration; // Duração do serviço em minutos
 
     @Enumerated(EnumType.STRING)
@@ -39,7 +41,7 @@ public class Appointment {
         // Construtor padrão
     }
 
-    public Appointment(Customer customer, Barber barber, Services service, Schedule schedule, BarberShop barberShop, Date appointmentDate, int duration, AppointmentStatus status) {
+    public Appointment(Customer customer, Barber barber, Services service, Schedule schedule, BarberShop barberShop, OffsetDateTime appointmentDate, int duration, AppointmentStatus status) {
         this.customer = customer;
         this.barber = barber;
         this.service = service;
@@ -100,11 +102,11 @@ public class Appointment {
         this.barberShop = barberShop;
     }
 
-    public Date getAppointmentDate() {
+    public OffsetDateTime getAppointmentDate() {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(Date appointmentDate) {
+    public void setAppointmentDate(OffsetDateTime appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 

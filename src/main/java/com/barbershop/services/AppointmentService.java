@@ -42,7 +42,7 @@ public class AppointmentService {
         Appointment existingAppointment = getAppointmentById(appointmentId);
 
         // Verifique se o novo horário não é anterior ao horário atual
-        if (updatedAppointment.getAppointmentDate().before(existingAppointment.getAppointmentDate())) {
+        if (updatedAppointment.getAppointmentDate().isBefore(existingAppointment.getAppointmentDate())) {
             throw new InvalidAppointmentUpdateException("Não é permitido alterar para um horário anterior ao horário atual.");
         }
 
