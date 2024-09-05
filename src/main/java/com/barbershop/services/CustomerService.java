@@ -69,6 +69,11 @@ public class CustomerService {
         return customerRepository.save(existingCustomer);
     }
 
+    public Customer findCustomerById(Long customerId) {
+        return customerRepository.findById(customerId)
+                .orElseThrow(() -> new CustomerNotFoundException("Cliente com ID " + customerId + " não encontrado."));
+    }
+
     private boolean isValidEmail(String email) {
         return email != null && email.contains("@");
     }

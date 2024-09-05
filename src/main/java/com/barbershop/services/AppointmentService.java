@@ -1,13 +1,14 @@
 package com.barbershop.services;
 
 import com.barbershop.entities.Appointment;
-import com.barbershop.entities.AppointmentStatus;
 import com.barbershop.entities.Barber;
 import com.barbershop.entities.Customer;
 import com.barbershop.exceptions.AppointmentTimeUnavailableException;
+import com.barbershop.exceptions.BarberNotFoundException;
 import com.barbershop.exceptions.InvalidAppointmentUpdateException;
 import com.barbershop.exceptions.AppointmentNotFoundException;
 import com.barbershop.repositories.AppointmentRepository;
+import com.barbershop.repositories.BarberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +19,13 @@ public class AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
     private final ScheduleService scheduleService;
+    private final BarberRepository barberRepository;
 
     @Autowired
-    public AppointmentService(AppointmentRepository appointmentRepository, ScheduleService scheduleService) {
+    public AppointmentService(AppointmentRepository appointmentRepository, ScheduleService scheduleService, BarberRepository barberRepository) {
         this.appointmentRepository = appointmentRepository;
         this.scheduleService = scheduleService;
+        this.barberRepository = barberRepository;
     }
 
     public Appointment createAppointment(Appointment appointment) {
@@ -92,7 +95,12 @@ public class AppointmentService {
     }
 
     public List<Appointment> findAppointmentsByBarber(Long barberId) {
-        // Implemente a lógica para buscar compromissos por ID de barbeiro
+        // Verificar se o barbeiro existe no banco de dados
+        if (!barberRepository.existsById(barberId)) {
+            throw new BarberNotFoundException("Barbeiro com ID " + barberId + " não encontrado.");
+        }
+
+        // Buscar compromissos pelo ID do barbeiro
         return appointmentRepository.findByBarberId(barberId);
     }
     public List<Appointment> findAppointmentsByCustomer(Customer customer){
