@@ -41,7 +41,7 @@ public class Appointment {
         // Construtor padrão
     }
 
-    public Appointment(Customer customer, Barber barber, Services service, Schedule schedule, BarberShop barberShop, OffsetDateTime appointmentDate, int duration, AppointmentStatus status) {
+    public Appointment(Customer customer, Barber barber, Services service, Schedule schedule, BarberShop barberShop, OffsetDateTime appointmentDate, int duration, AppointmentStatus status, double amount) {
         this.customer = customer;
         this.barber = barber;
         this.service = service;
@@ -126,7 +126,7 @@ public class Appointment {
         this.status = status;
     }
 
-    @Override
+        @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

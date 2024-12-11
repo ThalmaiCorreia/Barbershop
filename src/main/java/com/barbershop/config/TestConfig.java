@@ -42,8 +42,8 @@ public class TestConfig implements CommandLineRunner {
         barbershopRepository.save(barberShop);
 
         // Crie serviços
-        Services service1 = new Services("Haircut", 20.0, 40.0);
-        Services service2 = new Services("Shave", 15.0, 40.0);
+        Services service1 = new Services("Haircut", 20.0, 0.40);
+        Services service2 = new Services("Shave", 15.0, 0.40);
         servicesRepository.saveAll(Arrays.asList(service1, service2));
 
         // Crie um barbeiro
@@ -81,9 +81,9 @@ public class TestConfig implements CommandLineRunner {
 
         OffsetDateTime appointmentTime3 = OffsetDateTime.of(2024, 6, 13, 14, 30, 0, 0, ZoneOffset.UTC);
 
-        Appointment appointment1 = new Appointment(customer,barber, service1, schedule1, barberShop, appointmentTime1,30, AppointmentStatus.SCHEDULED );
-        Appointment appointment2 = new Appointment(customer1, barber1, service2, schedule2, barberShop, appointmentTime2,30,  AppointmentStatus.COMPLETED);
-        Appointment appointment3 = new Appointment(customer1, barber1, service2, schedule2, barberShop, appointmentTime3,30,  AppointmentStatus.CANCELED);
+        Appointment appointment1 = new Appointment(customer,barber, service1, schedule1, barberShop, appointmentTime1,30, AppointmentStatus.SCHEDULED, service1.getPrice() );
+        Appointment appointment2 = new Appointment(customer1, barber1, service2, schedule2, barberShop, appointmentTime2,30,  AppointmentStatus.COMPLETED, service2.getPrice());
+        Appointment appointment3 = new Appointment(customer1, barber1, service2, schedule2, barberShop, appointmentTime3,30,  AppointmentStatus.CANCELED, service2.getPrice());
 
         appointmentRepository.saveAll(Arrays.asList(appointment1, appointment2, appointment3));
     }

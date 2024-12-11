@@ -15,7 +15,7 @@ public class Services {
 
     private String name; // Nome do serviço (por exemplo, "Corte", "Barba")
     private double price; // Preço do serviço
-    private double commissionRate; // Taxa de comissão associada ao serviço
+
 
     @ManyToOne
     @JoinColumn(name = "barbershop_id")
@@ -32,7 +32,6 @@ public class Services {
     public Services(String name, double price, double commissionRate) {
         this.name = name;
         this.price = price;
-        this.commissionRate = commissionRate;
     }
 
     // Getters e setters
@@ -56,13 +55,6 @@ public class Services {
         this.price = price;
     }
 
-    public double getCommissionRate() {
-        return commissionRate;
-    }
-
-    public void setCommissionRate(double commissionRate) {
-        this.commissionRate = commissionRate;
-    }
 
     public BarberShop getBarberShop() {
         return barberShop;
@@ -86,11 +78,11 @@ public class Services {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Services services = (Services) o;
-        return Double.compare(services.price, price) == 0 && Double.compare(services.commissionRate, commissionRate) == 0 && Objects.equals(id, services.id) && Objects.equals(name, services.name);
+        return Double.compare(services.price, price) == 0 &&  Objects.equals(id, services.id) && Objects.equals(name, services.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, commissionRate);
+        return Objects.hash(id, name, price);
     }
 }

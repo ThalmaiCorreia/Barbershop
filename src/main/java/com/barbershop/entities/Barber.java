@@ -15,7 +15,9 @@ public class Barber extends User {
     @ManyToOne
     private BarberShop barberShop; // Barbeiro associado a uma barbearia
 
-    private double commission; // Comissão acumulada do barbeiro
+    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Commission> commission; // Comissão acumulada do barbeiro
 
     @OneToOne(mappedBy = "barber", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
@@ -25,7 +27,7 @@ public class Barber extends User {
     @JsonIgnore
     private List<Appointment> appointments; // Agendamentos do barbeiro
 
-    public Barber() {
+        public Barber() {
         // Construtor padrão
     }
 
@@ -45,11 +47,11 @@ public class Barber extends User {
         this.barberShop = barberShop;
     }
 
-    public double getCommission() {
+    public List<Commission> getCommission() {
         return commission;
     }
 
-    public void setCommission(double commission) {
+    public void setCommission(List<Commission> commission) {
         this.commission = commission;
     }
 
@@ -68,4 +70,6 @@ public class Barber extends User {
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
     }
+
+
 }
